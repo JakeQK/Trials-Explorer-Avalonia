@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Trials_Explorer.Features.ArchiveExplorer.Models;
@@ -11,6 +13,7 @@ namespace Trials_Explorer.Features.ArchiveExplorer.ViewModels;
 public partial class ArchiveExplorerViewModel : ViewModelBase
 {
     private readonly ArchiveService _archiveService;
+    private readonly IStorageProvider _storageProvider;
 
     [ObservableProperty]
     private ArchiveNodeViewModel? _rootNode;
@@ -21,9 +24,10 @@ public partial class ArchiveExplorerViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isArchiveLoaded;
 
-    public ArchiveExplorerViewModel(ArchiveService archiveService)
+    public ArchiveExplorerViewModel(ArchiveService archiveService, IStorageProvider storageProvider)
     {
         _archiveService = archiveService;
+        _storageProvider = storageProvider;
         _archiveService.ArchiveLoaded += OnArchiveLoaded;
         _archiveService.ArchiveUnloaded += OnArchiveUnloaded;
     }
@@ -60,8 +64,27 @@ public partial class ArchiveExplorerViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void OpenArchive(string path)
+    private async Task OpenArchiveAsync()
     {
-        _archiveService.OpenArchive(path);
+        var options = new FilePickerOpenOptions
+        {
+            Title = "Open Archive File",
+            AllowMultiple = false,
+            FileTypeFilter = new FilePickerFileType[]
+            {
+                new("Archive Files")
+                {
+                    Patterns = new[] { "*.pak" }
+                }
+            }
+        };
+
+        var result = await _storageProvider.OpenFilePickerAsync(options);
+        var file = result.FirstOrDefault();
+        
+        if (file != null)
+        {
+            _archiveService.OpenArchive(file.Path.LocalPath);
+        }
     }
 } 

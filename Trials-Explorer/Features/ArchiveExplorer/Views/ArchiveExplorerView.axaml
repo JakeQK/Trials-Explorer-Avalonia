@@ -10,6 +10,13 @@
     <Grid RowDefinitions="Auto,*">
         <!-- Toolbar -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8" Margin="8">
+            <Button Command="{Binding OpenArchiveCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <PathIcon Data="{StaticResource folder_open}"/>
+                    <TextBlock Text="Open Archive"/>
+                </StackPanel>
+            </Button>
+            
             <Button Command="{Binding ExtractSelectedCommand}"
                     IsEnabled="{Binding SelectedNode, Converter={x:Static ObjectConverters.IsNotNull}}">
                 <StackPanel Orientation="Horizontal" Spacing="8">
