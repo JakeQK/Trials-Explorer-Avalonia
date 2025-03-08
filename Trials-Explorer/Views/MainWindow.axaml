@@ -7,7 +7,7 @@
         x:Class="Trials_Explorer.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Trials_Explorer">
+        Title="Trials Explorer">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,6 +15,34 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <SplitView IsPaneOpen="True"
+              DisplayMode="CompactInline"
+              OpenPaneLength="250"
+              CompactPaneLength="48">
+        <SplitView.Pane>
+            <ListBox ItemsSource="{Binding NavigationItems}"
+                     SelectedItem="{Binding SelectedItem}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Spacing="8" Orientation="Horizontal">
+                            <PathIcon Data="{StaticResource {Binding Icon}}" Width="24" Height="24" />
+                            <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </SplitView.Pane>
+
+        <ContentControl Content="{Binding SelectedItem.Content}">
+            <ContentControl.DataTemplates>
+                <!-- Default content when no view is selected -->
+                <DataTemplate DataType="{x:Type x:String}">
+                    <TextBlock Text="{Binding}"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"/>
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+    </SplitView>
 
 </Window>

@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Trials_Explorer.Features.ArchiveExplorer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Trials_Explorer.Features.ArchiveExplorer.Views.ArchiveExplorerView"
+             x:DataType="vm:ArchiveExplorerViewModel">
+    
+    <Grid RowDefinitions="Auto,*">
+        <!-- Toolbar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="8" Margin="8">
+            <Button Command="{Binding ExtractSelectedCommand}"
+                    IsEnabled="{Binding SelectedNode, Converter={x:Static ObjectConverters.IsNotNull}}">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <PathIcon Data="{StaticResource download}"/>
+                    <TextBlock Text="Extract"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- Archive Tree -->
+        <TreeView Grid.Row="1" 
+                  ItemsSource="{Binding RootNode.Children}"
+                  SelectedItem="{Binding SelectedNode}"
+                  IsVisible="{Binding IsArchiveLoaded}">
+            <TreeView.ItemTemplate>
+                <TreeDataTemplate ItemsSource="{Binding Children}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <PathIcon Data="{StaticResource folder}" IsVisible="{Binding IsDirectory}"/>
+                        <PathIcon Data="{StaticResource file}" IsVisible="{Binding !IsDirectory}"/>
+                        <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </TreeDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+
+        <!-- Empty State -->
+        <TextBlock Grid.Row="1"
+                   Text="No archive loaded. Open an archive file to begin."
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   IsVisible="{Binding !IsArchiveLoaded}"/>
+    </Grid>
+</UserControl> 
