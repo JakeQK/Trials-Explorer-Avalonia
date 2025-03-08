@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BIUDXQqZeRA=",
+  "dgSpecHash": "/BxaIFf5aD0=",
   "success": true,
-  "projectFilePath": "F:\\dev\\Trials-Explorer\\Trials-Explorer\\Trials-Explorer.csproj",
+  "projectFilePath": "F:\\dev\\Trials-Explorer-Avalonia\\Trials-Explorer\\Trials-Explorer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\IS_PL\\.nuget\\packages\\avalonia\\11.2.1\\avalonia.11.2.1.nupkg.sha512",
     "C:\\Users\\IS_PL\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.22045.20230930\\avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",

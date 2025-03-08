@@ -1480,11 +1480,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\dev\\Trials-Explorer\\Trials-Explorer\\Trials-Explorer.csproj",
+      "projectUniqueName": "F:\\dev\\Trials-Explorer-Avalonia\\Trials-Explorer\\Trials-Explorer.csproj",
       "projectName": "Trials-Explorer",
-      "projectPath": "F:\\dev\\Trials-Explorer\\Trials-Explorer\\Trials-Explorer.csproj",
+      "projectPath": "F:\\dev\\Trials-Explorer-Avalonia\\Trials-Explorer\\Trials-Explorer.csproj",
       "packagesPath": "C:\\Users\\IS_PL\\.nuget\\packages\\",
-      "outputPath": "F:\\dev\\Trials-Explorer\\Trials-Explorer\\obj\\",
+      "outputPath": "F:\\dev\\Trials-Explorer-Avalonia\\Trials-Explorer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
